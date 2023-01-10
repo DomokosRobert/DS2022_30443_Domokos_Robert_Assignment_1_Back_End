@@ -3,6 +3,7 @@ package ro.ds.springA1.controllers;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
 import ro.ds.springA1.entities.Device;
 import ro.ds.springA1.service.DeviceService;
@@ -55,11 +56,13 @@ public class DeviceController {
         response.put("deleted",Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/customer/{id}/devices")
     public ResponseEntity<List<Device>> getDevicesForCustomer(@PathVariable("id") Long customerId)
     {
         List<Device> devices = deviceService.getDeviceByCustomerId(customerId);
         return ResponseEntity.ok(devices);
     }
+
 }
 

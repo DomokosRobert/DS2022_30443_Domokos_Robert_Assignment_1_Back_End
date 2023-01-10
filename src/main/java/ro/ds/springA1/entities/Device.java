@@ -15,6 +15,8 @@ public class Device {
     private String address;
     @Column(name="maxHourlyConsumption",nullable = false)
     private Double maxHourlyConsumption;
+    @Column(name="currentConsumption")
+    private Double currentConsumption;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -23,12 +25,13 @@ public class Device {
     public Device() {
     }
 
-    public Device(Long id, String description, String address, Double maxHourlyConsumption, Customer customer) {
+    public Device(Long id, String description, String address, Double maxHourlyConsumption, Customer customer, Double currentConsumption) {
         this.id = id;
         this.description = description;
         this.address = address;
         this.maxHourlyConsumption = maxHourlyConsumption;
         this.customer = customer;
+        this.currentConsumption = currentConsumption;
     }
 
     public Customer getCustomer() {
@@ -71,6 +74,14 @@ public class Device {
         this.maxHourlyConsumption = maxHourlyConsumption;
     }
 
+    public Double getCurrentConsumption() {
+        return currentConsumption;
+    }
+
+    public void setCurrentConsumption(Double currentConsumption) {
+        this.currentConsumption = currentConsumption;
+    }
+
     @Override
     public String toString() {
         return "Device{" +
@@ -78,6 +89,7 @@ public class Device {
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
                 ", maxHourlyConsumption=" + maxHourlyConsumption +
+                ", currentConsumption=" + currentConsumption +
                 ", customer=" + customer +
                 '}';
     }
@@ -87,11 +99,11 @@ public class Device {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Device device = (Device) o;
-        return Objects.equals(id, device.id) && Objects.equals(description, device.description) && Objects.equals(address, device.address) && Objects.equals(maxHourlyConsumption, device.maxHourlyConsumption) && Objects.equals(customer, device.customer);
+        return Objects.equals(id, device.id) && Objects.equals(description, device.description) && Objects.equals(address, device.address) && Objects.equals(maxHourlyConsumption, device.maxHourlyConsumption) && Objects.equals(currentConsumption, device.currentConsumption) && Objects.equals(customer, device.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, address, maxHourlyConsumption, customer);
+        return Objects.hash(id, description, address, maxHourlyConsumption, currentConsumption, customer);
     }
 }

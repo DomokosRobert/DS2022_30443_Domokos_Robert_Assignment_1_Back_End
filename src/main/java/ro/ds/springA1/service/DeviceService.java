@@ -49,15 +49,24 @@ public class DeviceService {
         oldDevice.setAddress(device.getAddress());
         oldDevice.setCustomer(device.getCustomer());
         oldDevice.setMaxHourlyConsumption(device.getMaxHourlyConsumption());
+        oldDevice.setCurrentConsumption(device.getCurrentConsumption());
         return deviceRepository.save(oldDevice);
     }
-
+    public Device addCurrentConsumption(Long id,Double value){
+        Device oldDevice = this.findDeviceById(id);
+        oldDevice.setCurrentConsumption(value);
+        return deviceRepository.save(oldDevice);
+    }
     public void delete(Long id){
         Device deletedDevice = this.findDeviceById(id);
         deviceRepository.delete(deletedDevice);
     }
     public List<Device> getDeviceByCustomerId(Long customerId){
         return deviceRepository.getDevicesByCustomerId(customerId);
+    }
+    public Boolean isConsumptionHigher(Long id){
+        Device ourDevice = deviceRepository.getById(id);
+        return ourDevice.getCurrentConsumption() > ourDevice.getMaxHourlyConsumption();
     }
 }
 

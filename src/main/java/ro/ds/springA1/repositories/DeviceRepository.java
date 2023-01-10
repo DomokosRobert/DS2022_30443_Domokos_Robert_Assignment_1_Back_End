@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface DeviceRepository extends JpaRepository<Device,Long> {
     List<Device> getDevicesByCustomerId(Long customerId);
+    Device getById(Long id);
 }
